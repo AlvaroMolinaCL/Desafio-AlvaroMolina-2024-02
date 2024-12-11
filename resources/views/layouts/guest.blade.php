@@ -11,7 +11,10 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('build/assets/app-CZmZ30Dk.css') }}">
+
+    <!-- Scripts -->
     <script src="{{ asset('build/assets/app-6ev2z4jn.js') }}" defer></script>
 </head>
 
