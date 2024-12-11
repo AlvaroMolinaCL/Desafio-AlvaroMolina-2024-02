@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -13,7 +14,8 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::all();
+        return view('artists.index', compact('artists'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        return view('artists.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Artist::create($request->all());
+        return redirect()->route('artists.index')->with('success', 'Artista creado exitosamente.');
     }
 
     /**
@@ -54,9 +61,9 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Artist $artist)
     {
-        //
+        return view('artists.edit', compact('artist'));
     }
 
     /**
@@ -66,9 +73,14 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Artist $artist)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $artist->update($request->all());
+        return redirect()->route('artist.index')->with('success', 'Artista actualizado exitosamente.');
     }
 
     /**
@@ -77,8 +89,9 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Artist $artist)
     {
-        //
+        $artist->delete();
+        return redirect()->route('artists.index')->with('success', 'Artista eliminado exitosamente.');
     }
 }

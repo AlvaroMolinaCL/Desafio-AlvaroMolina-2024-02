@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -13,7 +14,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::all();
+        return view('albums.index', compact('albums'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        return view('albums.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Album::create($request->all());
+        return redirect()->route('albums.index')->with('success', 'Álbum creado exitosamente.');
     }
 
     /**
@@ -54,9 +61,9 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Album $album)
     {
-        //
+        return view('albums.edit', compact('album'));
     }
 
     /**
@@ -66,9 +73,14 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Album $album)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $album->update($request->all());
+        return redirect()->route('album.index')->with('success', 'Álbum actualizado exitosamente.');
     }
 
     /**
@@ -77,8 +89,9 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Album $album)
     {
-        //
+        $album->delete();
+        return redirect()->route('albums.index')->with('success', 'Álbum eliminado exitosamente.');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
@@ -13,7 +14,8 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        //
+        $playlists = Playlist::all();
+        return view('playlists.index', compact('playlists'));
     }
 
     /**
@@ -23,7 +25,7 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        //
+        return view('playlists.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Playlist::create($request->all());
+        return redirect()->route('playlists.index')->with('success', 'Playlist creada exitosamente.');
     }
 
     /**
@@ -54,9 +61,9 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Playlist $playlist)
     {
-        //
+        return view('playlists.edit', compact('playlist'));
     }
 
     /**
@@ -66,9 +73,14 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Playlist $playlist)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $playlist->update($request->all());
+        return redirect()->route('playlist.index')->with('success', 'Playlist actualizada exitosamente.');
     }
 
     /**
@@ -77,8 +89,9 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Playlist $playlist)
     {
-        //
+        $playlist->delete();
+        return redirect()->route('playlists.index')->with('success', 'Playlist eliminada exitosamente.');
     }
 }
