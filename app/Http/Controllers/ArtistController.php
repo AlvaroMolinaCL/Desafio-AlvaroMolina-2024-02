@@ -80,7 +80,7 @@ class ArtistController extends Controller
         ]);
 
         $artist->update($request->all());
-        return redirect()->route('artist.index')->with('success', 'Artista actualizado exitosamente.');
+        return redirect()->route('artists.index')->with('success', 'Artista actualizado exitosamente.');
     }
 
     /**

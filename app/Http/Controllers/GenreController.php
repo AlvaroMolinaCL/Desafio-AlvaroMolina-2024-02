@@ -80,7 +80,7 @@ class GenreController extends Controller
         ]);
 
         $genre->update($request->all());
-        return redirect()->route('genre.index')->with('success', 'Género actualizado exitosamente.');
+        return redirect()->route('genres.index')->with('success', 'Género actualizado exitosamente.');
     }
 
     /**

@@ -80,7 +80,7 @@ class PlaylistController extends Controller
         ]);
 
         $playlist->update($request->all());
-        return redirect()->route('playlist.index')->with('success', 'Playlist actualizada exitosamente.');
+        return redirect()->route('playlists.index')->with('success', 'Playlist actualizada exitosamente.');
     }
 
     /**

@@ -80,7 +80,7 @@ class AlbumController extends Controller
         ]);
 
         $album->update($request->all());
-        return redirect()->route('album.index')->with('success', 'Álbum actualizado exitosamente.');
+        return redirect()->route('albums.index')->with('success', 'Álbum actualizado exitosamente.');
     }
 
     /**
