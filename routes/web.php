@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\PublicController;
@@ -18,14 +19,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Rutas accesibles públicamente
+Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/search', [PublicController::class, 'search'])->name('search');
+
+// Rutas protegidas por autenticación
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Dashboard principal
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Mantenedores
     Route::resource('genres', GenreController::class);
     Route::resource('albums', AlbumController::class);
     Route::resource('artists', ArtistController::class);
     Route::resource('playlists', PlaylistController::class);
 });
 
-Route::get('/', [PublicController::class, 'index'])->name('home');
-Route::get('/search', [PublicController::class, 'search'])->name('search');
-
-require __DIR__.'/auth.php';
+// Rutas de autenticación
+require __DIR__ . '/auth.php';
