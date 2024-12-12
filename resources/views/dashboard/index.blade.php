@@ -30,6 +30,12 @@
                         <h2 class="text-lg font-semibold">Playlists</h2>
                         <p>Gestiona las playlists.</p>
                     </a>
+
+                    <!-- Tarjeta de Canciones -->
+                    <a href="{{ route('songs.index') }}" class="p-6 bg-blue-100 rounded-lg shadow hover:bg-blue-200">
+                        <h2 class="text-lg font-semibold">Canciones publicadas</h2>
+                        <p>Gestiona las canciones publicadas.</p>
+                    </a>
                 </div>
             </div>
         </div>
