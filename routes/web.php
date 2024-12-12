@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 // Rutas accesibles públicamente
 Route::get('/', [PublicController::class, 'index'])->name('home');
-Route::get('/search', [PublicController::class, 'search'])->name('search');
+Route::get('/songs/recent', [SongController::class, 'recent'])->name('songs.recent');
+Route::get('/songs/search', [SongController::class, 'search'])->name('songs.search');
+
 
 // Rutas protegidas por autenticación
 Route::middleware(['auth', 'admin'])->group(function () {
