@@ -9,12 +9,14 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $popularAlbums = Album::with('artist')->orderBy('views', 'desc')->take(10)->get();
-        return view('public.index', compact('popularAlbums'));
+        // $popularAlbums = Album::with('artists')->orderBy('views', 'desc')->take(10)->get();
+        // return view('public.index', compact('popularAlbums'));
+        return view('public.index');
     }
 
     public function search(Request $request)
     {
+        /*
         $query = Album::query();
 
         if ($request->filled('artist')) {
@@ -22,5 +24,6 @@ class PublicController extends Controller
         }
 
         return view('public.search', ['albums' => $query->get()]);
+        */
     }
 }

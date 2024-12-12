@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -25,7 +26,8 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        return view('albums.create');
+        $artists = Artist::all(); // Obtener todos los artistas
+        return view('albums.create', compact('artists'));
     }
 
     /**
@@ -38,6 +40,7 @@ class AlbumController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'artist_id' => 'required|exists:artists,id',
         ]);
 
         Album::create($request->all());
@@ -63,7 +66,8 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        return view('albums.edit', compact('album'));
+        $artists = Artist::all(); // Obtener todos los artistas
+        return view('albums.edit', compact('album', 'artists'));
     }
 
     /**
@@ -77,6 +81,7 @@ class AlbumController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'artist_id' => 'required|exists:artists,id',
         ]);
 
         $album->update($request->all());
