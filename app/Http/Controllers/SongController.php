@@ -77,23 +77,20 @@ class SongController extends Controller
             'file_path' => 'nullable|mimes:mp3|max:10240',
             'description' => 'nullable|string',
         ]);
-        dd($request->all());
 
         $data = $request->all();
 
-        // Actualizar carátula si se proporciona
         if ($request->hasFile('cover')) {
             $data['cover'] = $request->file('cover')->store('covers', 'public');
         }
 
-        // Actualizar archivo MP3 si se proporciona
         if ($request->hasFile('file_path')) {
             $data['file_path'] = $request->file('file_path')->store('songs', 'public');
         }
 
         $song->update($data);
 
-        return redirect()->route('songs.index')->with('success', 'Canción actualizada exitosamente.');
+        return response()->json(['message' => 'Canción actualizada exitosamente.']);
     }
 
     public function destroy(Song $song)
