@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('albums', AlbumController::class);
     Route::resource('artists', ArtistController::class);
     Route::resource('playlists', PlaylistController::class);
+
+    // Administrador de canciones publicadas
+    Route::resource('songs', SongController::class);
 });
 
 // Rutas de autenticación
