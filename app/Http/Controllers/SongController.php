@@ -35,16 +35,20 @@ class SongController extends Controller
 
     public function search(Request $request)
     {
-        $query = Song::with('artist'); // Incluir datos del artista
+        $query = Song::query()->with('artist', 'album', 'genre');
 
         if ($term = $request->input('query')) {
             $query->where('title', 'LIKE', "%$term%")
                 ->orWhereHas('artist', function ($q) use ($term) {
                     $q->where('name', 'LIKE', "%$term%");
                 })
-                ->orWhere('genre', 'LIKE', "%$term%")
-                ->orWhere('release_year', 'LIKE', "%$term%")
-                ->orWhere('album', 'LIKE', "%$term%");
+                ->orWhereHas('album', function ($q) use ($term) {
+                    $q->where('title', 'LIKE', "%$term%");
+                })
+                ->orWhereHas('genre', function ($q) use ($term) {
+                    $q->where('name', 'LIKE', "%$term%");
+                })
+                ->orWhere('release_year', 'LIKE', "%$term%");
         }
 
         $songs = $query->paginate(12);
