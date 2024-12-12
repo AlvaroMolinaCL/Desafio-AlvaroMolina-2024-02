@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SongController extends Controller
 {
@@ -14,6 +15,47 @@ class SongController extends Controller
     {
         $songs = Song::with(['artist', 'album', 'genre'])->paginate(10);
         return view('songs.index', compact('songs'));
+    }
+
+    public function recent()
+    {
+        $songs = Song::with('artist') // Relación para obtener datos del artista
+            ->orderBy('created_at', 'desc')
+            ->paginate(12); // Paginación de 12 canciones por página
+
+        // Mapear canciones para incluir la URL de la carátula y el nombre del artista
+        $songs->transform(function ($song) {
+            $song->cover = Storage::url($song->cover);
+            $song->artist_name = $song->artist ? $song->artist->name : 'Artista Desconocido';
+            return $song;
+        });
+
+        return response()->json($songs);
+    }
+
+    public function search(Request $request)
+    {
+        $query = Song::with('artist'); // Incluir datos del artista
+
+        if ($term = $request->input('query')) {
+            $query->where('title', 'LIKE', "%$term%")
+                ->orWhereHas('artist', function ($q) use ($term) {
+                    $q->where('name', 'LIKE', "%$term%");
+                })
+                ->orWhere('genre', 'LIKE', "%$term%")
+                ->orWhere('release_year', 'LIKE', "%$term%")
+                ->orWhere('album', 'LIKE', "%$term%");
+        }
+
+        $songs = $query->paginate(12);
+
+        $songs->transform(function ($song) {
+            $song->cover = Storage::url($song->cover);
+            $song->artist_name = $song->artist ? $song->artist->name : 'Artista Desconocido';
+            return $song;
+        });
+
+        return response()->json($songs);
     }
 
     public function create()
@@ -38,11 +80,11 @@ class SongController extends Controller
             $song->duration_seconds = $request->input('duration_seconds');
 
             if ($request->hasFile('cover')) {
-                $song->cover = $request->file('cover')->store('covers');
+                $song->cover = $request->file('cover')->store('public/covers');
             }
 
             if ($request->hasFile('file_path')) {
-                $song->file_path = $request->file('file_path')->store('songs');
+                $song->file_path = $request->file('file_path')->store('public/songs');
             }
 
             $song->description = $request->input('description');
