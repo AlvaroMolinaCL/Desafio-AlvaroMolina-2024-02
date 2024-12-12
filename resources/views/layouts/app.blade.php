@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CZmZ30Dk.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BMofo1Me.css') }}">
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
-    <script src="{{ asset('build/assets/app-6ev2z4jn.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('build/assets/app-D8vfahbS.js') }}" defer></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -38,5 +39,8 @@
         </main>
     </div>
 </body>
+
+<!-- Scripts específicos de cada vista -->
+@yield('scripts')
 
 </html>

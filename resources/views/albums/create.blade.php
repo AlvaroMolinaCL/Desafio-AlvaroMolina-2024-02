@@ -9,6 +9,7 @@
                 <form action="{{ route('albums.store') }}" method="POST">
                     @csrf
 
+                    <!-- Campo para el título del álbum -->
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 font-bold">Nombre del Álbum:</label>
                         <input type="text" name="name" id="name"
@@ -19,9 +20,26 @@
                         @enderror
                     </div>
 
+                    <!-- Campo select para elegir el artista -->
+                    <div class="mb-4">
+                        <label for="artist_id" class="block text-gray-700 font-bold">Artista:</label>
+                        <select name="artist_id" id="artist_id"
+                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
+                            <option value="">Seleccione un artista</option>
+                            @foreach ($artists as $artist)
+                                <option value="{{ $artist->id }}" {{ old('artist_id') == $artist->id ? 'selected' : '' }}>
+                                    {{ $artist->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('artist_id')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div>
-                        <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded">Guardar</button>
-                        <a href="{{ route('albums.index') }}" class="bg-gray-500 text-black px-4 py-2 rounded">Cancelar</a>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
+                        <a href="{{ route('albums.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Cancelar</a>
                     </div>
                 </form>
             </div>

@@ -21,8 +21,8 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded">Actualizar</button>
-                        <a href="{{ route('artists.index') }}" class="bg-gray-500 text-black px-4 py-2 rounded">Cancelar</a>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Actualizar</button>
+                        <a href="{{ route('artists.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Cancelar</a>
                     </div>
                 </form>
             </div>
