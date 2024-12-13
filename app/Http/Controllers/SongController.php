@@ -21,7 +21,7 @@ class SongController extends Controller
     {
         $songs = Song::with('artist') // Relación para obtener datos del artista
             ->orderBy('created_at', 'desc')
-            ->paginate(12); // Paginación de 12 canciones por página
+            ->paginate(6); // Paginación de 12 canciones por página
 
         // Mapear canciones para incluir la URL de la carátula y el nombre del artista
         $songs->transform(function ($song) {
@@ -51,7 +51,7 @@ class SongController extends Controller
                 ->orWhere('release_year', 'LIKE', "%$term%");
         }
 
-        $songs = $query->paginate(12);
+        $songs = $query->paginate(6);
 
         $songs->transform(function ($song) {
             $song->cover = Storage::url($song->cover);
