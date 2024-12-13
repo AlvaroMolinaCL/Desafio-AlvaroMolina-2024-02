@@ -26,7 +26,7 @@
                                     <td class="px-4 py-3 border-b text-gray-700">{{ $song->id }}</td>
                                     <td class="px-4 py-3 border-b text-gray-700">{{ $song->title }}</td>
                                     <td class="px-4 py-3 border-b text-gray-700">{{ $song->artist->name }}</td>
-                                    <td class="px-4 py-3 border-b text-gray-700">{{ $song->album->title ?? 'N/A' }}</td>
+                                    <td class="px-4 py-3 border-b text-gray-700">{{ $song->album->name ?? 'N/A' }}</td>
                                     <td class="px-4 py-3 border-b text-gray-700">{{ $song->genre->name }}</td>
                                     <td class="px-4 py-3 border-b text-gray-700">{{ $song->release_year }}</td>
                                     <td class="px-4 py-3 border-b text-gray-700">
