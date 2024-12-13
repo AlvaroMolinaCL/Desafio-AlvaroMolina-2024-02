@@ -6,7 +6,7 @@
         <div class="bg-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h1 class="font-bold text-gray-800" style="font-size: 50px;">¡Ven y descubre música increíble!</h1>
-                <p class="mt-4 text-gray-600" style="font-size: 30px;">Explora las canciones más exitosas de este año y
+                <p class="mt-4 text-gray-600" style="font-size: 30px;">Explora las canciones más exitosas del año y
                     encuentra tus favoritas.</p>
                 <div class="mt-8">
                     <form id="search-form" class="flex justify-center items-center gap-2">
@@ -57,14 +57,16 @@
                         data.data.forEach(song => {
                             const songDiv = document.createElement('div');
                             songDiv.className =
-                                'flex bg-white shadow-md rounded-lg overflow-hidden';
+                                'flex bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow';
                             songDiv.innerHTML = `
-                                <img src="${song.cover}" alt="Cover" class="w-32 aspect-square object-cover">
-                                <div class="p-4 flex-1">
-                                    <h3 class="text-sm font-bold text-gray-800 truncate">${song.title}</h3>
-                                    <p class="text-sm text-gray-600 truncate">${song.artist_name}</p>
-                                </div>
-                            `;
+                        <a href="/song/${song.id}" class="flex w-full">
+                            <img src="${song.cover}" alt="Cover" class="w-32 aspect-square object-cover">
+                            <div class="p-4 flex-1" style="background-color: rgb(245, 245, 245);">
+                                <h3 class="text-sm font-bold text-gray-800 truncate">${song.title}</h3>
+                                <p class="text-sm text-gray-600 truncate">${song.artist_name}</p>
+                            </div>
+                        </a>
+                    `;
                             container.appendChild(songDiv);
                         });
 
@@ -110,13 +112,16 @@
 
                     data.data.forEach(song => {
                         const songDiv = document.createElement('div');
-                        songDiv.className = 'flex bg-white shadow-md rounded-lg overflow-hidden';
+                        songDiv.className =
+                            'flex bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow';
                         songDiv.innerHTML = `
-                    <img src="${song.cover}" alt="Cover" class="w-32 aspect-square object-cover">
-                    <div class="p-4 flex-1">
-                        <h3 class="text-sm font-bold text-gray-800 truncate">${song.title}</h3>
-                        <p class="text-sm text-gray-600 truncate">${song.artist_name}</p>
-                    </div>
+                    <a href="/song/${song.id}" class="flex w-full">
+                        <img src="${song.cover}" alt="Cover" class="w-32 aspect-square object-cover">
+                        <div class="p-4 flex-1" style="background-color: rgb(245, 245, 245);">
+                            <h3 class="text-sm font-bold text-gray-800 truncate">${song.title}</h3>
+                            <p class="text-sm text-gray-600 truncate">${song.artist_name}</p>
+                        </div>
+                    </a>
                 `;
                         container.appendChild(songDiv);
                     });
