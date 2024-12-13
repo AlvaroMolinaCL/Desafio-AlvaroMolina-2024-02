@@ -35,6 +35,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $playlists->links() }}
                 </div>
             </div>
         </div>

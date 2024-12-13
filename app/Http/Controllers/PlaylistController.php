@@ -14,7 +14,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $playlists = Playlist::all();
+        $playlists = Playlist::get()->toQuery()->paginate(10);
         return view('playlists.index', compact('playlists'));
     }
 

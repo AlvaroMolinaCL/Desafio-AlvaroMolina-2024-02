@@ -15,7 +15,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
+        $albums = Album::get()->toQuery()->paginate(10);
         return view('albums.index', compact('albums'));
     }
 
@@ -66,7 +66,7 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        $artists = Artist::all(); // Obtener todos los artistas
+        $artists = Artist::all();
         return view('albums.edit', compact('album', 'artists'));
     }
 

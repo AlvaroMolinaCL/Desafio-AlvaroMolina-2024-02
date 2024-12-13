@@ -34,6 +34,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $genres->links() }}
                 </div>
             </div>
         </div>
