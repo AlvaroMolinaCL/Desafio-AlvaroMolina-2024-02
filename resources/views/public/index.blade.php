@@ -5,15 +5,15 @@
         <!-- Buscador -->
         <div class="bg-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl font-bold text-gray-800">Descubre música increíble</h1>
-                <p class="mt-4 text-gray-600">Explora las canciones más recientes y encuentra tus favoritos.</p>
-                <div class="mt-6">
-                    <form id="search-form">
+                <h1 class="font-bold text-gray-800" style="font-size: 50px;">¡Ven y descubre música increíble!</h1>
+                <p class="mt-4 text-gray-600" style="font-size: 30px;">Explora las canciones más exitosas de este año y
+                    encuentra tus favoritas.</p>
+                <div class="mt-8">
+                    <form id="search-form" class="flex justify-center items-center gap-2">
                         <input type="text" id="search-bar" name="query"
-                            placeholder="Buscar canciones, artistas, álbumes, géneros o años"
+                            placeholder="Buscar por canciones, artistas, álbumes, géneros o años"
                             class="w-full sm:w-1/2 p-3 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-500">
-                        <button type="submit"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
                             Buscar
                         </button>
                     </form>
@@ -24,7 +24,6 @@
         <!-- Canciones más recientes -->
         <div class="bg-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Canciones Recientes</h2>
                 <div id="songs-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Las canciones se cargarán dinámicamente -->
                 </div>
