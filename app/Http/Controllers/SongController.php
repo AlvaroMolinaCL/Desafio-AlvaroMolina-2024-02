@@ -19,11 +19,10 @@ class SongController extends Controller
 
     public function recent()
     {
-        $songs = Song::with('artist') // Relación para obtener datos del artista
+        $songs = Song::with('artist')
             ->orderBy('created_at', 'desc')
-            ->paginate(6); // Paginación de 12 canciones por página
+            ->paginate(6);
 
-        // Mapear canciones para incluir la URL de la carátula y el nombre del artista
         $songs->transform(function ($song) {
             $song->cover = Storage::url($song->cover);
             $song->artist_name = $song->artist ? $song->artist->name : 'Artista Desconocido';
@@ -60,6 +59,20 @@ class SongController extends Controller
         });
 
         return response()->json($songs);
+    }
+
+    public function show($id)
+    {
+        $song = Song::with(['artist', 'album', 'playlist', 'genre'])->findOrFail($id);
+
+        $minutes = intdiv($song->duration_seconds, 60);
+        $seconds = $song->duration_seconds % 60;
+        $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
+
+        $previousSong = Song::where('id', '<', $id)->orderBy('id', 'desc')->first();
+        $nextSong = Song::where('id', '>', $id)->orderBy('id')->first();
+
+        return view('songs.show', compact('song', 'formattedDuration', 'previousSong', 'nextSong'));
     }
 
     public function create()

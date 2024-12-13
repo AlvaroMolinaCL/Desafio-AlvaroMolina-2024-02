@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rutas accesibles públicamente
 Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/song/{id}', [SongController::class, 'show'])->name('songs.show');
 Route::get('/songs/recent', [SongController::class, 'recent'])->name('songs.recent');
 Route::get('/songs/search', [SongController::class, 'search'])->name('songs.search');
 
