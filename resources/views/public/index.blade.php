@@ -54,11 +54,11 @@
                     .then(response => response.json())
                     .then(data => {
                         const container = document.getElementById('songs-container');
-                        container.innerHTML = ''; // Clear the container
+                        container.innerHTML = '';
                         data.data.forEach(song => {
                             const songDiv = document.createElement('div');
                             songDiv.className =
-                                'bg-white shadow-md rounded-lg overflow-hidden';
+                                'flex bg-white shadow-md rounded-lg overflow-hidden';
                             songDiv.innerHTML = `
                                 <img src="${song.cover}" alt="Cover" class="w-32 aspect-square object-cover">
                                 <div class="p-4 flex-1">
