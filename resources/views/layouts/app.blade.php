@@ -25,7 +25,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100" style="background-color: rgb(108, 170, 247);">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -38,7 +38,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main style="background-color: rgb(108, 170, 247);">
             @yield('content')
         </main>
     </div>
